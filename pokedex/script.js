@@ -40,16 +40,41 @@ const createPokemonCard = (pokemon) => {
   const type = main_types.find(type => pokeTypes.indexOf(type) > -1)
   const color = colors[type];
   pokemonEl.style.backgroundColor = color;
-  const pokeInnerHTML = `
-    <div class="img-container">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" alt="${name}">
-    </div>
-    <div class="info">
-        <span class="number">#${id}</span>
-        <h3 class="name">${name}</h3>
-        <small class="type">Type:<span>${type}</span></small>
-    </div>
-    `;
-  pokemonEl.innerHTML = pokeInnerHTML;
+
+  // Create image container
+  const imgContainer = document.createElement('div');
+  imgContainer.className = 'img-container';
+  const img = document.createElement('img');
+  img.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
+  img.alt = name;
+  imgContainer.appendChild(img);
+
+  // Create info container
+  const infoDiv = document.createElement('div');
+  infoDiv.className = 'info';
+
+  const numberSpan = document.createElement('span');
+  numberSpan.className = 'number';
+  numberSpan.textContent = `#${id}`;
+
+  const nameH3 = document.createElement('h3');
+  nameH3.className = 'name';
+  nameH3.textContent = name;
+
+  const typeSmall = document.createElement('small');
+  typeSmall.className = 'type';
+  typeSmall.textContent = 'Type:';
+  const typeSpan = document.createElement('span');
+  typeSpan.textContent = type;
+  typeSmall.appendChild(typeSpan);
+
+  // Append all elements
+  infoDiv.appendChild(numberSpan);
+  infoDiv.appendChild(nameH3);
+  infoDiv.appendChild(typeSmall);
+
+  pokemonEl.appendChild(imgContainer);
+  pokemonEl.appendChild(infoDiv);
+  
   poke_container.appendChild(pokemonEl);
 }
