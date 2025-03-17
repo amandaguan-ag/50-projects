@@ -63,6 +63,9 @@ h1{
   display: none;
   margin: 30px 0 0;
 }
+.faq.active .faq-text {
+  display: block;  /* Show text when FAQ is active */
+}
 .faq-toggle{
   background-color: transparent;
   border: 0;
