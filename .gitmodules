@@ -1,0 +1,3 @@
+[submodule "sticky-nav"]
+	path = sticky-nav
+	url = https://github.com/amandaguan-ag/sticky-nav.git
