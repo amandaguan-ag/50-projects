@@ -19,16 +19,40 @@ function showMovies(movies) {
     const { title, poster_path, vote_average, overview } = movie
     const movieEl = document.createElement('div')
     movieEl.classList.add('movie')
-    movieEl.innerHTML = `
-       <img src="${IMG_PATH + poster_path}" alt="${title}">
-      <div class="movie-info">
-        <h3>${title}</h3>
-        <span class="${getClassByRate(vote_average)}">${vote_average}</span>
-      </div>
-      <div class="overview">
-        <h3>Overview</h3>${overview}
-      </div>
-  `
+    
+    // Create and set content safely
+    const movieContent = document.createElement('div')
+    
+    // Create image element safely
+    const img = document.createElement('img')
+    img.src = IMG_PATH + poster_path
+    img.alt = title
+    movieContent.appendChild(img)
+    
+    // Create movie info div safely
+    const movieInfo = document.createElement('div')
+    movieInfo.className = 'movie-info'
+    
+    const h3 = document.createElement('h3')
+    h3.textContent = title
+    movieInfo.appendChild(h3)
+    
+    const span = document.createElement('span')
+    span.className = getClassByRate(vote_average)
+    span.textContent = vote_average
+    movieInfo.appendChild(span)
+    movieContent.appendChild(movieInfo)
+    
+    // Create overview div safely
+    const overviewDiv = document.createElement('div')
+    overviewDiv.className = 'overview'
+    const overviewTitle = document.createElement('h3')
+    overviewTitle.textContent = 'Overview'
+    overviewDiv.appendChild(overviewTitle)
+    overviewDiv.appendChild(document.createTextNode(overview))
+    movieContent.appendChild(overviewDiv)
+    
+    movieEl.appendChild(movieContent)
     main.appendChild(movieEl)
   })
 }
